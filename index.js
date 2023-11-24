@@ -7,6 +7,7 @@
 const http = require('http');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
+const config = require('./config');
 
 
 // The server should respond on all requests with a stirng
@@ -84,8 +85,8 @@ var server = http.createServer(function(req, res){
 });
 
 // Start the server and have it listen on port 3000
-server.listen(3000, function(){
-  console.log('The  server is listenning on port 3000 now');
+server.listen(config.port, function(){
+  console.log('The  server is listenning on port '+config.port+' now on '+config.envName+' mode');
 });
 
 // Define handlers
@@ -94,7 +95,7 @@ var handlers = {};
 // Sample handler
 handlers.sample = function(data, callback){
   // Callback a HTTP status code and a payload object
-  callback(406, {'name': 'Sample Handler'});
+  callback(406, {'name': 'Sample Handler', 'env': process.env.secVar});
 };
 
 // Not found handler

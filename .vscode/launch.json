@@ -7,11 +7,17 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "NodeJS index",
+            "name": "NodeJS Template REST API",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/index.js"
+            "program": "${workspaceFolder}/index.js",
+            "env": {
+                "NODE_ENV": "staging"
+                // "NODE_ENV": "production"
+            },
+            "envFile": "${workspaceFolder}/.env.staging"
+            // "envFile": "${workspaceFolder}/.env.production"
         }
     ]
 }
