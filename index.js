@@ -1,4 +1,4 @@
-/***
+/**
  * Primary file for the API
  * 
  */
@@ -10,6 +10,25 @@ const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config');
 const fs = require('fs');
+
+
+// TEST
+// @TODO delete this
+// const _data = require('./lib/data');
+// 
+// _data.create('test', 'newFile', {'foo': 'bar'}, function(err){
+//   console.log('This was the error:', err);
+// });
+// _data.read('test', 'newFile', function(err, data){
+//   console.log('This was the error:', err, 'and this was the data', data);
+// });
+// _data.update('test', 'newFile', {'doo': 'bass'}, function(err){
+//   console.log('This was the error:', err);
+// });
+// _data.delete('test', 'newFile', function(err){
+//   console.log('This was the error:', err);
+// });
+
 
 // Instantiate an HTTP server
 var httpServer = http.createServer(function(req, res){
@@ -95,6 +114,7 @@ var unifiedServer = function(req, res){
         
         // Send the response
         res.setHeader('Content-Type', 'application/json');
+        res.setHeader('X-Zoosman-API-Version', '2023.12');
         res.writeHead(statusCode);
         res.end(payloadString);
 
@@ -113,10 +133,10 @@ var unifiedServer = function(req, res){
 // Define handlers
 var handlers = {};
 
-// Sample handler
-handlers.sample = function(data, callback){
+// Health check handler
+handlers.health = function(data, callback){
   // Callback a HTTP status code and a payload object
-  callback(406, {'name': 'Sample Handler', 'env': process.env.secVar});
+  callback(200, {'status': 'The server is healthy', 'env': process.env.secVar});
 };
 
 // Not found handler
@@ -126,5 +146,5 @@ handlers.notFound = function(data, callback){
 
 // Define a request router
 router = {
-  'sample': handlers.sample
+  'health': handlers.health
 }
