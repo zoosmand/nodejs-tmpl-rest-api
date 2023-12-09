@@ -8,8 +8,11 @@ const http = require('http');
 const https = require('https');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
-const config = require('./config');
+const config = require('./lib/config');
 const fs = require('fs');
+const handlers = require('./lib/handlers');
+const helpers = require('./lib/helpers');
+
 
 
 // TEST
@@ -83,68 +86,49 @@ var unifiedServer = function(req, res){
   req.on('end', function(){
     buffer += decoder.end();
 
-    try {
-      buffer = JSON.parse(buffer);
-    } catch (e) {
-      // return console.error(e);
-    } finally {
+    // Choose the handler this request should go to. If one is not found use the notFuld handler.
+    var chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
 
-      // Choose the handler this request should go to. If one is not found use the notFuld handler.
-      var chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
-
-      // Construst the data object to send to the handler
-      var data = {
-        'trimmedPath': trimmedPath,
-        'queryStringObject': queryStringObject,
-        'method': method,
-        'headers': headers,
-        'payload': buffer
-      }
-
-      // Route the request to the specified handler
-      chosenHandler(data, function(statusCode, payload){
-        // Use the status code called from tha handler, or default status code 200
-        statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
-
-        // Use the payload called back by the gandler, or default to an empty object
-        payload = typeof(payload) == 'object' ? payload : {};
-
-        // Conver the payload to the string
-        var payloadString = JSON.stringify(payload);
-        
-        // Send the response
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('X-Zoosman-API-Version', '2023.12');
-        res.writeHead(statusCode);
-        res.end(payloadString);
-
-        // Log the request path
-        console.log('Request is received\n\ton path: '+trimmedPath
-          +'\n\twith method: '+method
-          +'\n\twith query string paramenters: '+JSON.stringify(queryStringObject)
-          +'\n\twith these headers: '+JSON.stringify(headers)
-          +'\n\twith payload: '+JSON.stringify(buffer)
-        );
-      });
+    // Construst the data object to send to the handler
+    var data = {
+      'trimmedPath': trimmedPath,
+      'queryStringObject': queryStringObject,
+      'method': method,
+      'headers': headers,
+      'payload': helpers.parseJsonToObject(buffer)
     }
+
+    // Route the request to the specified handler
+    chosenHandler(data, function(statusCode, payload){
+      // Use the status code called from tha handler, or default status code 200
+      statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
+
+      // Use the payload called back by the gandler, or default to an empty object
+      payload = typeof(payload) == 'object' ? payload : {};
+
+      // Conver the payload to the string
+      var payloadString = JSON.stringify(payload);
+      
+      // Send the response
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('X-Zoosman-API-Version', '2023.12');
+      res.writeHead(statusCode);
+      res.end(payloadString);
+
+      // Log the request path
+      console.log('Request is received\n\ton path: '+trimmedPath
+        +'\n\twith method: '+method
+        +'\n\twith query string paramenters: '+JSON.stringify(queryStringObject)
+        +'\n\twith these headers: '+JSON.stringify(headers)
+        +'\n\twith payload: '+JSON.stringify(buffer)
+      );
+    });
   });
 };
 
-// Define handlers
-var handlers = {};
-
-// Health check handler
-handlers.health = function(data, callback){
-  // Callback a HTTP status code and a payload object
-  callback(200, {'status': 'The server is healthy', 'env': process.env.secVar});
-};
-
-// Not found handler
-handlers.notFound = function(data, callback){
-  callback(404);
-};
 
 // Define a request router
 router = {
-  'health': handlers.health
+  'health': handlers.health,
+  'users': handlers.users
 }
