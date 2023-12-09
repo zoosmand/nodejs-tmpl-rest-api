@@ -131,4 +131,4 @@ dist
 *.crt
 *.pem
 
-users/
+.data/

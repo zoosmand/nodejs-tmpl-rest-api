@@ -130,5 +130,6 @@ var unifiedServer = function (req, res) {
 // Define a request router
 router = {
   'health': handlers.health,
-  'users': handlers.users
+  'users': handlers.users,
+  'tokens': handlers.tokens
 }
