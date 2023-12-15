@@ -31,6 +31,11 @@ const helpers = require('./lib/helpers');
 // _data.delete('test', 'newFile', function(err){
 //   console.log('This was the error:', err);
 // });
+//
+// const _db = require('./lib/db');
+// _db.create('users', '2222222222', {'foo': 'bar'}, function(err, msg){
+//   console.log('This was the error:', err, msg.Error);
+// });
 
 
 // Instantiate an HTTP server
