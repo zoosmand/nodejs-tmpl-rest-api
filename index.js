@@ -4,14 +4,22 @@
  */
 
 // Dependency
-const http = require('http');
-const https = require('https');
-const url = require('url');
-const StringDecoder = require('string_decoder').StringDecoder;
-const config = require('./lib/config');
-const fs = require('fs');
-const handlers = require('./lib/handlers');
-const helpers = require('./lib/helpers');
+import { createServer } from 'http';
+import { createServer as _createServer } from 'https';
+import { parse } from 'url';
+import { StringDecoder } from 'string_decoder';
+// import httpPort from './lib/config.js';
+// import envName from './lib/config.js';
+// import httpsPort from './lib/config.js';
+import config from './lib/config.js';
+import { readFileSync } from 'fs';
+// import notFound from './lib/handlers.js';
+// import health from './lib/handlers.js';
+// import users from './lib/handlers.js';
+// import tokens from './lib/handlers.js';
+import handlers from './lib/handlers.js';
+// import parseJsonToObject from './lib/helpers.js';
+import helpers from './lib/helpers.js';
 
 
 
@@ -61,52 +69,53 @@ const helpers = require('./lib/helpers');
 
 
 // Instantiate an HTTP server
-var httpServer = http.createServer(function (req, res) {
+var httpServer = createServer((req, res) => {
   unifiedServer(req, res);
 });
 
 // Start the HTTP server
-httpServer.listen(config.httpPort, function () {
+httpServer.listen(config.httpPort, () => {
   console.log('The  server is listenning on httpPort ' + config.httpPort + ' now on ' + config.envName + ' mode');
 });
 
+
 // Instantiate an HTTPS server
-const httpsServerOptions = {
-  'key': fs.readFileSync('./crt/api_server.key'),
-  'cert': fs.readFileSync('./crt/api_server.crt')
+var httpsServerOptions = {
+  'key': readFileSync('./crt/api_server.key'),
+  'cert': readFileSync('./crt/api_server.crt')
 };
-var httpsServer = https.createServer(httpsServerOptions, function (req, res) {
+var httpsServer = _createServer(httpsServerOptions, (req, res) => {
   unifiedServer(req, res);
 });
 
 // Start the HTTPS server
-httpsServer.listen(config.httpsPort, function () {
+httpsServer.listen(config.httpsPort, () => {
   console.log('The  server is listenning on httpsPort ' + config.httpsPort + ' now on ' + config.envName + ' mode');
 });
 
 
 // All the server logic for the both HTTP and HTTPS server
 // The server should respond on all requests with a stirng
-var unifiedServer = function (req, res) {
+var unifiedServer = (req, res) => {
   // Geet the URL and parse it
-  var parsedUrl = url.parse(req.url, true);
+  let parsedUrl = parse(req.url, true);
 
   // Get the path
-  var path = parsedUrl.pathname;
-  var trimmedPath = path.replace(/^\/+|\/+$/g, '');
+  let path = parsedUrl.pathname;
+  let trimmedPath = path.replace(/^\/+|\/+$/g, '');
 
   // Get the query string as an object
-  var queryStringObject = parsedUrl.query;
+  let queryStringObject = parsedUrl.query;
 
   // Get the HTTP method
-  var method = req.method.toLowerCase();
+  let method = req.method.toLowerCase();
 
   // Get the headers as an object
-  var headers = req.headers;
+  let headers = req.headers;
 
   // Get the payload, if any
-  var decoder = new StringDecoder('utf-8');
-  var buffer = '';
+  let decoder = new StringDecoder('utf-8');
+  let buffer = '';
   req.on('data', function (data) {
     buffer += decoder.write(data);
   });
@@ -114,10 +123,10 @@ var unifiedServer = function (req, res) {
     buffer += decoder.end();
 
     // Choose the handler this request should go to. If one is not found use the notFuld handler.
-    var chosenHandler = typeof (router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
+    let chosenHandler = typeof (router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
 
     // Construst the data object to send to the handler
-    var data = {
+    let data = {
       'trimmedPath': trimmedPath,
       'queryStringObject': queryStringObject,
       'method': method,
@@ -126,7 +135,7 @@ var unifiedServer = function (req, res) {
     }
 
     // Route the request to the specified handler
-    chosenHandler(data, function (statusCode, payload) {
+    chosenHandler(data, (statusCode, payload) => {
       // Use the status code called from tha handler, or default status code 200
       statusCode = typeof (statusCode) == 'number' ? statusCode : 200;
 
@@ -155,7 +164,7 @@ var unifiedServer = function (req, res) {
 
 
 // Define a request router
-router = {
+var router = {
   'health': handlers.health,
   'users': handlers.users,
   'tokens': handlers.tokens
