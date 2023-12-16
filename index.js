@@ -43,6 +43,11 @@ const helpers = require('./lib/helpers');
 // _db.create('users', '2222222222', userData, function(err){
 //   console.log('This was the error:', err);
 // });
+//
+// const _db = require('./lib/db');
+// _db.read('users', '2222222222', function(err){
+//   console.log('This was the error:', err);
+// });
 
 
 // Instantiate an HTTP server
