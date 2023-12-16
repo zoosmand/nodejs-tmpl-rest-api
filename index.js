@@ -33,8 +33,15 @@ const helpers = require('./lib/helpers');
 // });
 //
 // const _db = require('./lib/db');
-// _db.create('users', '2222222222', {'foo': 'bar'}, function(err, msg){
-//   console.log('This was the error:', err, msg.Error);
+// userData = {
+//   'phone': '1234567890',
+//   'firstName': 'John',
+//   'lastName': 'Smith',
+//   'hashedPassword': 'thisIsAPassword',
+//   'tosAgreement': true
+// };
+// _db.create('users', '2222222222', userData, function(err){
+//   console.log('This was the error:', err);
 // });
 
 
