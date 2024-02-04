@@ -12,8 +12,8 @@
     "email": "zoosmand@gmail.com",
     "url": "https://api.askug.net"
   },
-  "license":"LGPL-3.0-only",
+  "license": "LGPL-3.0-only",
   "dependencies": {
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.7"
   }
 }
