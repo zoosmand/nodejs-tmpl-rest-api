@@ -132,3 +132,6 @@ dist
 *.pem
 
 .data/
+
+package-lock.json
+package.json
