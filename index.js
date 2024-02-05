@@ -3,7 +3,9 @@
  * 
  */
 
-// Dependency
+/**
+ * Dependency.
+ */
 import { createServer } from 'http';
 import { createServer as _createServer } from 'https';
 import { parse } from 'url';
@@ -68,18 +70,24 @@ import helpers from './lib/helpers.js';
 // });
 
 
-// Instantiate an HTTP server
+/**
+ * Instantiate an HTTP server.
+ */
 var httpServer = createServer((req, res) => {
   unifiedServer(req, res);
 });
 
-// Start the HTTP server
+/**
+ * Start the HTTP server.
+ */
 httpServer.listen(config.httpPort, () => {
   console.log('The  server is listenning on httpPort ' + config.httpPort + ' now on ' + config.envName + ' mode');
 });
 
 
-// Instantiate an HTTPS server
+/**
+ * Instantiate an HTTPS server.
+ */
 var httpsServerOptions = {
   'key': readFileSync('./crt/api_server.key'),
   'cert': readFileSync('./crt/api_server.crt')
@@ -88,14 +96,21 @@ var httpsServer = _createServer(httpsServerOptions, (req, res) => {
   unifiedServer(req, res);
 });
 
-// Start the HTTPS server
+/**
+ * Start the HTTPS server.
+ */
 httpsServer.listen(config.httpsPort, () => {
   console.log('The  server is listenning on httpsPort ' + config.httpsPort + ' now on ' + config.envName + ' mode');
 });
 
 
-// All the server logic for the both HTTP and HTTPS server
-// The server should respond on all requests with a stirng
+/**
+ * Handles HTTP/HTTPS operations on both servers.
+ * All the server logic for the both HTTP and HTTPS server.
+ * The server should respond on all requests with a stirng.
+ * @param {object} req An HTTP request.
+ * @param {object} res An HTTP response.
+ */
 var unifiedServer = (req, res) => {
   // Geet the URL and parse it
   let parsedUrl = parse(req.url, true);
@@ -163,7 +178,9 @@ var unifiedServer = (req, res) => {
 };
 
 
-// Define a request router
+/**
+ * Define a request router
+ */
 var router = {
   'health': handlers.health,
   'users': handlers.users,
