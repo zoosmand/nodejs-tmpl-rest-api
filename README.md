@@ -47,7 +47,7 @@ curl -i -k -X POST -H 'Content-Type: application/json' https://localhost:3001/to
 #### Get the token info
 
 ~~~ bash
-curl -i -k -X GET -H 'Content-Type: application/json' https://localhost:3001/tokens?id=***token***
+curl -i -k -X GET -H 'Content-Type: application/json' https://localhost:3001/tokens?token=***token***
 ~~~
 
 #### Extend the token expiry
@@ -59,5 +59,5 @@ curl -i -k -X PUT -H 'Content-Type: application/json' https://localhost:3001/tok
 #### Delete the token
 
 ~~~ bash
-curl -i -k -X DELETE -H 'Content-Type: application/json' https://localhost:3001/tokens?id=***token***
+curl -i -k -X DELETE -H 'Content-Type: application/json' https://localhost:3001/tokens?token=***token***
 ~~~
