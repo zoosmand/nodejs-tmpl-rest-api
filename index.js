@@ -10,17 +10,9 @@ import { createServer } from 'http';
 import { createServer as _createServer } from 'https';
 import { parse } from 'url';
 import { StringDecoder } from 'string_decoder';
-// import httpPort from './lib/config.js';
-// import envName from './lib/config.js';
-// import httpsPort from './lib/config.js';
 import config from './lib/config.js';
 import { readFileSync } from 'fs';
-// import notFound from './lib/handlers.js';
-// import health from './lib/handlers.js';
-// import users from './lib/handlers.js';
-// import tokens from './lib/handlers.js';
 import handlers from './lib/handlers.js';
-// import parseJsonToObject from './lib/helpers.js';
 import helpers from './lib/helpers.js';
 
 

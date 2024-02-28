@@ -53,7 +53,7 @@ curl -i -k -X GET -H 'Content-Type: application/json' https://localhost:3001/tok
 #### Extend the token expiry
 
 ~~~ bash
-curl -i -k -X PUT -H 'Content-Type: application/json' https://localhost:3001/tokens -d '{"id":"***token***", "extend":true}'
+curl -i -k -X PUT -H 'Content-Type: application/json' https://localhost:3001/tokens -d '{"token":"***token***", "extend":true}'
 ~~~
 
 #### Delete the token
