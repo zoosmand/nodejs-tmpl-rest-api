@@ -154,7 +154,7 @@ var unifiedServer = (req, res) => {
 
       // Send the response
       res.setHeader('Content-Type', 'application/json');
-      res.setHeader('X-Zoosman-API-Version', '2023.12');
+      res.setHeader('X-Zoosman-API-Version', '2024.07');
       res.writeHead(statusCode);
       res.end(payloadString);
 
