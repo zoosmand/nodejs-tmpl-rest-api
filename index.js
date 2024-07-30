@@ -12,7 +12,9 @@ import { parse } from 'url';
 import { StringDecoder } from 'string_decoder';
 import config from './lib/config.js';
 import { readFileSync } from 'fs';
-import handlers from './lib/handlers.js';
+import common from './lib/common.js';
+import users from './lib/users.js';
+import tokens from './lib/tokens.js';
 import helpers from './lib/helpers.js';
 
 
@@ -130,7 +132,7 @@ var unifiedServer = (req, res) => {
     buffer += decoder.end();
 
     // Choose the handler this request should go to. If one is not found use the notFuld handler.
-    let chosenHandler = typeof (router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
+    let chosenHandler = typeof (router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : common.notFound;
 
     // Construst the data object to send to the handler
     let data = {
@@ -174,7 +176,7 @@ var unifiedServer = (req, res) => {
  * Define a request router
  */
 var router = {
-  'health': handlers.health,
-  'users': handlers.users,
-  'tokens': handlers.tokens
+  'health': common.health,
+  'users': users.handlers,
+  'tokens': tokens.handlers
 }
