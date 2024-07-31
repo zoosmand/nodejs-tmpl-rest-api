@@ -57,7 +57,7 @@ VALUES
     ('Chicken filet', 118390, 4.8, 'Chicken filet, 600g.'),
     ('Seabass fish', 528365, 12.6, 'Seabass fish, 1kg.'),
     ('Toilet paper', 240471, 8.6, 'Toilet paper, 3 layers, 12x pack.'),
-    ('Appple vinegar', 893571, 5.8, 'Apple vinegar, 500ml.'),
+    ('Apple vinegar', 893571, 5.8, 'Apple vinegar, 500ml.'),
     ('Tomato sauce', 992411, 1.3, 'Spiced tomato sauce, 200ml.'),
     ('Candys', 1160034, 0.45, 'Sweet candys, 100g.')
 ;
