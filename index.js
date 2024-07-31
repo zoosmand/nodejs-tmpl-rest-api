@@ -15,6 +15,7 @@ import { readFileSync } from 'fs';
 import common from './lib/common.js';
 import users from './lib/users.js';
 import tokens from './lib/tokens.js';
+import items from './lib/items.js';
 import helpers from './lib/helpers.js';
 
 
@@ -178,5 +179,6 @@ var unifiedServer = (req, res) => {
 var router = {
   'health': common.health,
   'users': users.handlers,
-  'tokens': tokens.handlers
+  'tokens': tokens.handlers,
+  'items': items.handlers
 }
