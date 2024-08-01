@@ -12,11 +12,12 @@ import { parse } from 'url';
 import { StringDecoder } from 'string_decoder';
 import config from './lib/config.js';
 import { readFileSync } from 'fs';
+import helpers from './lib/helpers.js';
 import common from './lib/common.js';
 import users from './lib/users.js';
 import tokens from './lib/tokens.js';
 import items from './lib/items.js';
-import helpers from './lib/helpers.js';
+import orders from './lib/orders.js';
 
 
 
@@ -180,5 +181,6 @@ var router = {
   'health': common.health,
   'users': users.handlers,
   'tokens': tokens.handlers,
-  'items': items.handlers
+  'items': items.handlers,
+  'orders': orders.handlers
 }

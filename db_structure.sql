@@ -68,14 +68,16 @@ CREATE TABLE orders (
     uid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     user INTEGER NOT NULL,
     'order' INTEGER NOT NULL,
+    paid INTEGER(1) NOT NULL DEFAULT 0,
     expired_at DATETIME NOT NULL,
     FOREIGN KEY(user) REFERENCES users(uid)
 );
 
-CREATE TABLE order_contents (
+CREATE TABLE order_items (
     uid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     'order' INTEGER NOT NULL,
     item INTEGER NOT NULL,
+    quantity INTEGER NOT NULL DEFAULT 1,
     FOREIGN KEY('order') REFERENCES orders(uid),
     FOREIGN KEY(item) REFERENCES items(uid)
 );
@@ -84,6 +86,7 @@ CREATE TABLE payments (
     uid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     'order' INTEGER NOT NULL,
     id INTEGER NOT NULL,
+    total FLOAT NOT NULL DEFAULT .0,
     status VARCHAR(256),
     FOREIGN KEY('order') REFERENCES orders(uid)
 );
