@@ -60,7 +60,7 @@ VALUES
     ('Toilet paper', 240471, 8.6, 'Toilet paper, 3 layers, 12x pack.'),
     ('Apple vinegar', 893571, 5.8, 'Apple vinegar, 500ml.'),
     ('Tomato sauce', 992411, 1.3, 'Spiced tomato sauce, 200ml.'),
-    ('Candys', 1160034, 0.45, 'Sweet candys, 100g.')
+    ('Candys', 110034, 0.45, 'Sweet candys, 100g.')
 ;
 
 
@@ -72,6 +72,7 @@ CREATE TABLE orders (
     expired_at DATETIME NOT NULL,
     FOREIGN KEY(user) REFERENCES users(uid)
 );
+CREATE UNIQUE INDEX order_UIDX ON orders ('order');
 
 CREATE TABLE order_items (
     uid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
