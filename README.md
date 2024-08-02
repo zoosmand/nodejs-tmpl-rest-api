@@ -72,3 +72,14 @@ The template REST API for any purposes
     ~~~ bash
     curl -i -k -H 'Content-Type: application/json' https://localhost:3001/tokens -X DELETE -H 'Authorization: ***token***'
     ~~~
+
+---
+
+### Workaround
+
+~~~ bash
+curl -i -k -H 'Content-Type: application/json' https://localhost:3001/users -X POST  -d '{"firstName":"John", "lastName":"Smith", "phone":"1234567890", "address":"Evergreen str., 17045, Springfield.", "email":"john@mail.com", "password":"KaliMera", "tosAgreement":true}';
+curl -i -k -H 'Content-Type: application/json' https://localhost:3001/tokens -X POST  -d '{"email":"john\@mail.com", "password":"KaliMera"}';
+curl -i -k -H 'Content-Type: application/json' https://localhost:3001/users -X PUT -d '{"firstName":"Homer", "lastName": "Simpson"}' -H 'Authorization: ***token***';
+curl -i -k -H 'Content-Type: application/json' https://localhost:3001/items -X GET -H 'Authorization: ***token***';
+~~~

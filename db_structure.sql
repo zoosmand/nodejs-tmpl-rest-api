@@ -12,6 +12,7 @@ CREATE TABLE users (
     last_name VARCHAR(256) NOT NULL,
     address VARCHAR(1024) NOT NULL,
     password VARCHAR(256) NOT NULL,
+    allowed_orders INTEGER(1) NOT NULL DEFAULT 5,
     tos_agreement INTEGER(1) NOT NULL,
     deleted INTEGER(1) NOT NULL DEFAULT 0
 );
@@ -59,7 +60,7 @@ VALUES
     ('Toilet paper', 240471, 8.6, 'Toilet paper, 3 layers, 12x pack.'),
     ('Apple vinegar', 893571, 5.8, 'Apple vinegar, 500ml.'),
     ('Tomato sauce', 992411, 1.3, 'Spiced tomato sauce, 200ml.'),
-    ('Candys', 1160034, 0.45, 'Sweet candys, 100g.')
+    ('Candys', 110034, 0.45, 'Sweet candys, 100g.')
 ;
 
 
@@ -67,14 +68,17 @@ CREATE TABLE orders (
     uid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     user INTEGER NOT NULL,
     'order' INTEGER NOT NULL,
+    paid INTEGER(1) NOT NULL DEFAULT 0,
     expired_at DATETIME NOT NULL,
     FOREIGN KEY(user) REFERENCES users(uid)
 );
+CREATE UNIQUE INDEX order_UIDX ON orders ('order');
 
-CREATE TABLE order_contents (
+CREATE TABLE order_items (
     uid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     'order' INTEGER NOT NULL,
     item INTEGER NOT NULL,
+    quantity INTEGER NOT NULL DEFAULT 1,
     FOREIGN KEY('order') REFERENCES orders(uid),
     FOREIGN KEY(item) REFERENCES items(uid)
 );
@@ -83,6 +87,7 @@ CREATE TABLE payments (
     uid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     'order' INTEGER NOT NULL,
     id INTEGER NOT NULL,
+    total FLOAT NOT NULL DEFAULT .0,
     status VARCHAR(256),
     FOREIGN KEY('order') REFERENCES orders(uid)
 );
