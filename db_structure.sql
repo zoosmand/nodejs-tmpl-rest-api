@@ -23,7 +23,7 @@ CREATE TABLE tokens (
     uid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     user INTEGER NOT NULL,
     token VARCHAR(64) NOT NULL,
-    expired_at DATETIME NOT NULL,
+    expire_at DATETIME NOT NULL,
     deleted INTEGER(1) NOT NULL DEFAULT 0,
     FOREIGN KEY(user) REFERENCES users(uid)
 );
@@ -69,7 +69,7 @@ CREATE TABLE orders (
     user INTEGER NOT NULL,
     'order' INTEGER NOT NULL,
     paid INTEGER(1) NOT NULL DEFAULT 0,
-    expired_at DATETIME NOT NULL,
+    expire_at DATETIME NOT NULL,
     FOREIGN KEY(user) REFERENCES users(uid)
 );
 CREATE UNIQUE INDEX order_UIDX ON orders ('order');
