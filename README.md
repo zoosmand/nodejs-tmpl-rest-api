@@ -6,6 +6,14 @@ The template REST API for any purposes
 
 ---
 
+## Random string
+
+~~~ bash
+echo $(tr -dc 'A-Za-z0-9!@#$%^&*()}{|' < /dev/random | head -c 128)
+~~~
+
+---
+
 ## API
 
 ### Prerequisites
