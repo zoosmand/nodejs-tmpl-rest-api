@@ -13,11 +13,11 @@
             ],
             "program": "${workspaceFolder}/index.js",
             "env": {
-                "NODE_ENV": "staging"
-                // "NODE_ENV": "production"
+                "NODE_ENV": "dev"
+                // "NODE_ENV": "prod"
             },
-            "envFile": "${workspaceFolder}/.env.staging"
-            // "envFile": "${workspaceFolder}/.env.production"
+            "envFile": "${workspaceFolder}/.env.dev"
+            // "envFile": "${workspaceFolder}/.env.prod"
         }
     ]
 }
