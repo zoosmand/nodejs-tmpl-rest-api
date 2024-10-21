@@ -18,6 +18,7 @@ import users from './lib/users.js';
 import tokens from './lib/tokens.js';
 import items from './lib/items.js';
 import orders from './lib/orders.js';
+import payments from './lib/payments.js';
 
 
 
@@ -182,5 +183,6 @@ var router = {
   'users': users.handlers,
   'tokens': tokens.handlers,
   'items': items.handlers,
-  'orders': orders.handlers
+  'orders': orders.handlers,
+  'payments': payments.handlers
 }
