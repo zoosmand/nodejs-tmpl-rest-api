@@ -31,12 +31,12 @@ echo $(tr -dc 'A-Za-z0-9!@#$%^&*()}{|' < /dev/random | head -c 128)
     ~~~ bash
     curl -i -k -H 'Content-Type: application/json' https://localhost:3001/users -X POST \
         -d '{
+            "email":"john@mail.com", 
+            "password":"<password>", 
             "firstName":"John", 
             "lastName":"Smith", 
-            "phone":"1234567890", 
-            "email":"john\@mail.com", 
             "address":"14021, Evergreen str., Springfield, MO", 
-            "password":"***", 
+            "phone":"1234567890", 
             "tosAgreement":true
         }'
     ~~~
@@ -44,25 +44,25 @@ echo $(tr -dc 'A-Za-z0-9!@#$%^&*()}{|' < /dev/random | head -c 128)
 - Get the user
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/users -X GET -H 'Authorization: ***token***'
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/users -X GET -H 'Authorization: <token>'
     ~~~
 
 - Update the user (either all, or a single parameter )
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/users -X PUT -H 'Authorization: ***token***' \
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/users -X PUT -H 'Authorization: <token>' \
         -d '{
             "firstName":"John", 
             "lastName":"Smith", 
             "address":"14023, Evergreen str., Springfield, MO", 
-            "password":"***"
+            "password":"<password>"
         }'
     ~~~
 
 - Delete the user
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/users -X DELETE -H 'Authorization: ***token***'
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/users -X DELETE -H 'Authorization: <token>'
     ~~~
 
 ---
@@ -75,20 +75,20 @@ echo $(tr -dc 'A-Za-z0-9!@#$%^&*()}{|' < /dev/random | head -c 128)
     curl -i -k -H 'Content-Type: application/json' https://localhost:3001/tokens -X POST \
     -d '{
         "email":"john\@mail.com", 
-        "password":"***"
+        "password":"<password>"
     }'
     ~~~
 
 - Extend the token expiry
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/tokens -X PUT -H 'Authorization: ***token***'
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/tokens -X PUT -H 'Authorization: <token>'
     ~~~
 
 - Delete the token
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/tokens -X DELETE -H 'Authorization: ***token***'
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/tokens -X DELETE -H 'Authorization: <token>'
     ~~~
 
 ---
@@ -98,13 +98,13 @@ echo $(tr -dc 'A-Za-z0-9!@#$%^&*()}{|' < /dev/random | head -c 128)
 - Get list of items (goods)
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/items -X GET -H 'Authorization: ***token***'
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/items -X GET -H 'Authorization: <token>'
     ~~~
 
 - Get a particular item (good)
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/items?itemId=***itemId*** -X GET -H 'Authorization: ***token***'
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/items?itemId=<itemId> -X GET -H 'Authorization: <token>'
     ~~~
 
 ---
@@ -114,29 +114,29 @@ echo $(tr -dc 'A-Za-z0-9!@#$%^&*()}{|' < /dev/random | head -c 128)
 - Create an order
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders -X POST -H 'Authorization: ***token***'
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders -X POST -H 'Authorization: <token>'
     ~~~
 
 - Get list of orders
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders -X GET -H 'Authorization: ***token***'
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders -X GET -H 'Authorization: <token>'
     ~~~
 
 - Get a particular order
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders?orderId=***orderId*** -X GET -H 'Authorization: ***token***'
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders?orderId=<orderId> -X GET -H 'Authorization: <token>'
     ~~~
 
 - Add an item to the order
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders -X PUT -H 'Authorization: ***token***' \
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders -X PUT -H 'Authorization: <token>' \
     -d '{
-        "orderId":***orderId***, 
-        "itemId":***itemId***, 
-        "itemQuantity":***quantity***
+        "orderId":<orderId>, 
+        "itemId":<itemId>, 
+        "itemQuantity":<quantity>
     }'
 
     ~~~
@@ -144,5 +144,5 @@ echo $(tr -dc 'A-Za-z0-9!@#$%^&*()}{|' < /dev/random | head -c 128)
 - Delete the order
 
     ~~~ bash
-    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders?orderId=***orderId*** -X DELETE -H 'Authorization: ***token***'
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders?orderId=<orderId> -X DELETE -H 'Authorization: <token>'
     ~~~

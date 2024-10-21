@@ -7,11 +7,11 @@
 CREATE TABLE users (
     uid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     email VARCHAR(128) NOT NULL,
-    phone VARCHAR(64) NOT NULL,
+    password VARCHAR(128) NOT NULL,
     first_name VARCHAR(256) NOT NULL,
     last_name VARCHAR(256) NOT NULL,
     address VARCHAR(1024) NOT NULL,
-    password VARCHAR(128) NOT NULL,
+    phone VARCHAR(64) NOT NULL,
     allowed_orders INTEGER(1) NOT NULL DEFAULT 5,
     tos_agreement INTEGER(1) NOT NULL,
     deleted INTEGER(1) NOT NULL DEFAULT 0
