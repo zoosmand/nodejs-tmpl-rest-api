@@ -5,7 +5,9 @@
   "description": "Learning NodeJS REST API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ignore-pattern 'crt' --ignore-pattern '.git' --ignore-pattern '.vscode'",
+    "lint-fix": "eslint --fix . --ignore-pattern 'crt' --ignore-pattern '.git' --ignore-pattern '.vscode'"
   },
   "author": {
     "name": "Dmitry Slobodchikov",
@@ -14,13 +16,13 @@
   },
   "license": "LGPL-3.0-only",
   "dependencies": {
+    "@eslint/compat": "^1.2.1",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "eslint": "^9.13.0",
+    "eslint-plugin-jest": "^28.8.3",
     "globals": "^15.11.0"
-  },
-  "lint": "eslint .  --ext .js",
-  "lint-fix": "eslint --fix .  --ext .js"
+  }
 }
