@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ignore-pattern 'crt' --ignore-pattern '.git' --ignore-pattern '.vscode'",
-    "lint-fix": "eslint --fix . --ignore-pattern 'crt' --ignore-pattern '.git' --ignore-pattern '.vscode'"
+    "lint": "eslint . --ignore-pattern 'crt' --ignore-pattern '.git' --ignore-pattern '.vscode' --ignore-pattern 'lib/api_template.js'",
+    "lint-fix": "eslint --fix . --ignore-pattern 'crt' --ignore-pattern '.git' --ignore-pattern '.vscode' --ignore-pattern 'lib/api_template.js'"
   },
   "author": {
     "name": "Dmitry Slobodchikov",
