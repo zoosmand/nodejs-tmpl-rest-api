@@ -70,7 +70,7 @@ import payments from './lib/payments.js';
 /**
  * Instantiate an HTTP server.
  */
-var httpServer = createServer((req, res) => {
+let httpServer = createServer((req, res) => {
   unifiedServer(req, res);
 });
 
@@ -85,11 +85,11 @@ httpServer.listen(config.httpPort, () => {
 /**
  * Instantiate an HTTPS server.
  */
-var httpsServerOptions = {
+let httpsServerOptions = {
   'key': readFileSync('./crt/api_server.key'),
   'cert': readFileSync('./crt/api_server.crt')
 };
-var httpsServer = _createServer(httpsServerOptions, (req, res) => {
+let httpsServer = _createServer(httpsServerOptions, (req, res) => {
   unifiedServer(req, res);
 });
 
@@ -108,7 +108,7 @@ httpsServer.listen(config.httpsPort, () => {
  * @param {object} req An HTTP request.
  * @param {object} res An HTTP response.
  */
-var unifiedServer = (req, res) => {
+let unifiedServer = (req, res) => {
   // Geet the URL and parse it
   let parsedUrl = parse(req.url, true);
 
@@ -144,7 +144,7 @@ var unifiedServer = (req, res) => {
       'method': method,
       'headers': headers,
       'payload': helpers.parseJsonToObject(buffer)
-    }
+    };
 
     // Route the request to the specified handler
     chosenHandler(data, (statusCode, payload) => {
@@ -155,7 +155,7 @@ var unifiedServer = (req, res) => {
       payload = typeof (payload) == 'object' ? payload : {};
 
       // Conver the payload to the string
-      var payloadString = JSON.stringify(payload);
+      let payloadString = JSON.stringify(payload);
 
       // Send the response
       res.setHeader('Content-Type', 'application/json');
@@ -178,11 +178,11 @@ var unifiedServer = (req, res) => {
 /**
  * Define a request router
  */
-var router = {
+let router = {
   'health': common.health,
   'users': users.handlers,
   'tokens': tokens.handlers,
   'items': items.handlers,
   'orders': orders.handlers,
-  'payments': payments.handlers
-}
+  'orders/payments': payments.handlers
+};
