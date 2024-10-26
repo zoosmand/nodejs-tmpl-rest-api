@@ -6,10 +6,10 @@ The template REST API for any purposes
 
 ---
 
-## Get milliseconds in bash
+## Get milliseconds + 1 hour in bash
 
 ~~~
-echo $(($(date +%s%3N)+3600))
+echo $(($(date +%s%3N)+3600000))
 ~~~
 
 ## Random string
