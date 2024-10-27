@@ -12,7 +12,7 @@ CREATE TABLE users (
     last_name VARCHAR(256) NOT NULL,
     address VARCHAR(1024) NOT NULL,
     phone VARCHAR(64) NOT NULL,
-    stripe_id VARCHAR(32) NULL,
+    payment_provider_id VARCHAR(32) NULL,
     allowed_orders INTEGER(1) NOT NULL DEFAULT 5,
     tos_agreement INTEGER(1) NOT NULL,
     deleted INTEGER(1) NOT NULL DEFAULT 0

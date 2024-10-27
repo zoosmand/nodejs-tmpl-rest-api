@@ -152,3 +152,24 @@ echo $(tr -dc 'A-Za-z0-9!@#$%^&*()}{|' < /dev/random | head -c 128)
     ~~~ bash
     curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders?orderId=<orderId> -X DELETE -H 'Authorization: <token>'
     ~~~
+
+- Pay the order
+
+    *Create customer on Stripe*
+    ~~~ bash
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders/payments -X POST -H 'Authorization: <token>' \
+    -d '{
+        "mode":"createCustomer"
+    }'
+
+    ~~~
+
+    *Pay the order*
+    ~~~ bash
+    curl -i -k -H 'Content-Type: application/json' https://localhost:3001/orders/payments -X POST -H 'Authorization: <token>' \
+    -d '{
+        "orderId":<orderId>, 
+        "mode":"payOrder"
+    }'
+
+    ~~~
