@@ -14,10 +14,10 @@
     "email": "zoosmand@gmail.com",
     "url": "https://api.askug.net"
   },
-  "license": "LGPL-3.0-only",
+  "license": "GPL-3.0-only",
   "dependencies": {
     "@eslint/compat": "^1.2.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^6.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
